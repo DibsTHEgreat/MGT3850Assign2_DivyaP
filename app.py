@@ -7,20 +7,24 @@ app = Flask(__name__)
 DATA_FILE = 'data.json'
 
 def load_data():
+    """Load JSON data from the data file."""
     with open(DATA_FILE, 'r') as f:
         return json.load(f)
 
 def save_data(data):
+    """Save JSON data to the data file."""
     with open(DATA_FILE, 'w') as f:
         json.dump(data, f, indent=2)
 
 @app.route('/')
 def index():
+    """Render the homepage showing all events."""
     data = load_data()
     return render_template('index.html', events=data['events'])
 
 @app.route('/create', methods=['GET', 'POST'])
 def create_event():
+    """Create a new event and save it to data.json."""
     if request.method == 'POST':
         data = load_data()
         event = {
@@ -37,6 +41,7 @@ def create_event():
 
 @app.route('/register/<int:event_id>', methods=['GET', 'POST'])
 def register(event_id):
+    """Register a user for a specific event."""
     data = load_data()
     event = next((e for e in data['events'] if e['id'] == event_id), None)
     if request.method == 'POST':
@@ -53,6 +58,7 @@ def register(event_id):
 
 @app.route('/checkin/<int:event_id>', methods=['GET', 'POST'])
 def checkin(event_id):
+    """Check in a user to an event using their email."""
     data = load_data()
     if request.method == 'POST':
         checkin = {
@@ -67,6 +73,7 @@ def checkin(event_id):
 
 @app.route('/feedback/<int:event_id>', methods=['GET', 'POST'])
 def feedback(event_id):
+    """Submit feedback for a specific event."""
     if request.method == 'POST':
         data = load_data()
         fb = {
@@ -81,19 +88,19 @@ def feedback(event_id):
 
 @app.route('/dashboard')
 def dashboard():
+    """Render the dashboard with summary stats and average feedback per event."""
     data = load_data()
-    
+
+    # Collect ratings grouped by event
     rating_summary = {}
     for fb in data.get('feedback', []):
         eid = fb['event_id']
-        if eid not in rating_summary:
-            rating_summary[eid] = []
-        rating_summary[eid].append(fb['rating'])
+        rating_summary.setdefault(eid, []).append(fb['rating'])
 
-    avg_ratings = {}
-    for eid, ratings in rating_summary.items():
-        avg_ratings[eid] = sum(ratings) / len(ratings)
+    # Compute average rating
+    avg_ratings = {eid: sum(ratings) / len(ratings) for eid, ratings in rating_summary.items()}
 
+    # Map event IDs to event names
     event_names = {event['id']: event['name'] for event in data['events']}
 
     return render_template(
@@ -103,13 +110,13 @@ def dashboard():
         event_names=event_names
     )
 
-
 @app.route('/delete/<int:event_id>', methods=['POST'])
 def delete_event(event_id):
+    """Delete an event and its related data."""
     data = load_data()
 
+    # Remove the event and associated data
     data['events'] = [event for event in data['events'] if event['id'] != event_id]
-
     data['registrations'] = [r for r in data.get('registrations', []) if r['event_id'] != event_id]
     data['checkins'] = [c for c in data.get('checkins', []) if c['event_id'] != event_id]
     data['feedback'] = [f for f in data.get('feedback', []) if f['event_id'] != event_id]
@@ -119,6 +126,7 @@ def delete_event(event_id):
 
 @app.route('/view_feedback/<int:event_id>')
 def view_feedback(event_id):
+    """View all feedback entries for a given event."""
     data = load_data()
     event = next((e for e in data['events'] if e['id'] == event_id), None)
     feedbacks = [f for f in data.get('feedback', []) if f['event_id'] == event_id]
