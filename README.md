@@ -1,6 +1,14 @@
 
 # 📅 Event Management Dashboard (Flask App)
 
+## Author
+
+Divya Pateliya  
+Student at University of Lethbridge
+MGT3850 - Assignment 2
+
+---
+
 ## Overview
 
 This is a simple web application built with Flask to manage events, registrations, check-ins, feedback collection, and visual analytics. It’s designed to simulate a basic event hosting platform with CRUD capabilities and data visualization.
@@ -22,14 +30,7 @@ This Flask-based web application provides a streamlined platform to:
 
 By consolidating all these tasks into one interface and supporting data visualization, the application helps organizers make informed decisions, improve attendee experiences, and reduce administrative overhead.
 
-
 ---
-
-## Author
-
-Divya Pateliya  
-Student at University of Lethbridge
-MGT3850 - Assignment 2
 
 ## Features
 
@@ -116,5 +117,3 @@ python app.py
 ## License
 
 MIT License (Free to use, modify, distribute)
-
----
