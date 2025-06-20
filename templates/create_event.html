@@ -1,0 +1,21 @@
+<!-- create_event.html -->
+{% extends "base.html" %}
+{% block title %}Create Event{% endblock %}
+{% block content %}
+  <h1>✨ Create New Event</h1>
+  <form method="POST">
+    <label>📝 Event Name:</label>
+    <input type="text" name="name" placeholder="Enter event name..." required>
+
+    <label>🏷️ Event Type:</label>
+    <input type="text" name="type" placeholder="Conference, Workshop, Meetup..." required>
+
+    <label>📅 Event Date:</label>
+    <input type="date" name="date" required>
+
+    <label>📍 Location:</label>
+    <input type="text" name="location" placeholder="Enter venue or address..." required>
+
+    <button type="submit"><span>🚀 Create Event</span></button>
+  </form>
+{% endblock %}

@@ -1,0 +1,67 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Tech 101",
+      "type": "Workshop",
+      "date": "2025-07-05",
+      "location": "Tech Platform, Calgary, AB"
+    },
+    {
+      "id": 2,
+      "name": "Tech 201",
+      "type": "Workshop",
+      "date": "2025-08-22",
+      "location": "Tech Platform, Calgary, AB"
+    },
+    {
+      "id": 3,
+      "name": "Tech 301",
+      "type": "Workshop",
+      "date": "2025-09-30",
+      "location": "Tech Platform, Calgary, AB"
+    }
+  ],
+  "registrations": [
+    {
+      "event_id": 1,
+      "name": "Divya",
+      "email": "divya.pateliya@uleth.ca",
+      "timestamp": "2025-06-19 21:54:24.925641"
+    }
+  ],
+  "checkins": [
+    {
+      "event_id": 1,
+      "email": "me@gmail.com",
+      "checkin_time": "2025-06-19 20:20:24.926741"
+    }
+  ],
+  "feedback": [
+    {
+      "event_id": 1,
+      "rating": 5,
+      "comment": "This is a random commment"
+    },
+    {
+      "event_id": 1,
+      "rating": 3,
+      "comment": "It was alright... could have added more info about AI."
+    },
+    {
+      "event_id": 1,
+      "rating": 5,
+      "comment": "Awesome!"
+    },
+    {
+      "event_id": 2,
+      "rating": 5,
+      "comment": "It was great!"
+    },
+    {
+      "event_id": 3,
+      "rating": 1,
+      "comment": "Man this was disappointing! They didn't have pizza this time..."
+    }
+  ]
+}

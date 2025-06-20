@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Feedback for {{ event.name }}{% endblock %}
+{% block content %}
+  <h1>💬 Feedback for "{{ event.name }}"</h1>
+
+  {% if feedbacks %}
+    <div class="feedback-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+      <div class="stat-mini">
+        <div class="stat-number-small">{{ feedbacks|length }}</div>
+        <p>Total Reviews</p>
+      </div>
+      <div class="stat-mini">
+        <div class="stat-number-small">{{ "%.1f"|format(feedbacks|sum(attribute='rating')/feedbacks|length) }}</div>
+        <p>Average Rating</p>
+      </div>
+    </div>
+
+    <div class="feedback-list">
+      {% for fb in feedbacks %}
+        <div class="feedback-card">
+          <div class="rating-display">
+            {% for i in range(1, 6) %}
+              {% if i <= fb.rating %}
+                <span class="star filled">⭐</span>
+              {% else %}
+                <span class="star empty">☆</span>
+              {% endif %}
+            {% endfor %}
+            <span class="rating-text">{{ fb.rating }}/5</span>
+          </div>
+          
+          {% if fb.comment %}
+            <div class="comment-section">
+              <strong>💭 Comment:</strong>
+              <p class="comment-text">{{ fb.comment }}</p>
+            </div>
+          {% else %}
+            <p class="no-comment">No additional comment provided.</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="no-feedback">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">📝</div>
+      <p>No feedback submitted yet for this event.</p>
+      <p style="color: #718096; margin-top: 0.5rem;">Be the first to share your thoughts!</p>
+    </div>
+  {% endif %}
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <a href="{{ url_for('index') }}" class="back-btn">🏠 Back to Home</a>
+  </div>
+{% endblock %}

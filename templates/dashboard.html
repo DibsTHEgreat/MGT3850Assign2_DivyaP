@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+  <h1>📊 Dashboard</h1>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <p>Total Events</p>
+      <div class="stat-number">{{ data.events|length }}</div>
+    </div>
+    <div class="stat-card">
+      <p>Total Registrations</p>
+      <div class="stat-number">{{ data.registrations|length }}</div>
+    </div>
+    <div class="stat-card">
+      <p>Total Check-ins</p>
+      <div class="stat-number">{{ data.checkins|length }}</div>
+    </div>
+    <div class="stat-card">
+      <p>Total Feedback</p>
+      <div class="stat-number">{{ data.feedback|length }}</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 3rem;">
+    <h2>📝 Average Feedback Ratings by Event</h2>
+    <canvas id="ratingsChart" width="400" height="200" style="max-width: 100%;"></canvas>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ctx = document.getElementById('ratingsChart').getContext('2d');
+
+    const labels = {{ event_names | tojson }};
+    const avgRatings = {{ avg_ratings | tojson }};
+
+    const chartLabels = Object.keys(avgRatings).map(id => labels[id]);
+    const chartData = Object.values(avgRatings);
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: chartLabels,
+        datasets: [{
+          label: 'Average Rating (out of 5)',
+          data: chartData,
+          backgroundColor: 'rgba(54, 162, 235, 0.7)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+          borderRadius: 5
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 5,
+            title: {
+              display: true,
+              text: 'Rating'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return 'Rating: ' + context.raw.toFixed(2);
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+{% endblock %}
