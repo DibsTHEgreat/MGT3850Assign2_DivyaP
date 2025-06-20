@@ -87,10 +87,6 @@ python app.py
 - Manual testing was done for:
   - Event creation, registration, check-in, feedback
   - Edge cases like deleting non-existent events, empty feedback, etc.
-- Future enhancements:
-  - Add automated unit tests using `pytest` or `unittest`
-  - Form validation and error display
-
 ---
 
 ## License
