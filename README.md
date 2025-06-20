@@ -5,7 +5,31 @@
 
 This is a simple web application built with Flask to manage events, registrations, check-ins, feedback collection, and visual analytics. It’s designed to simulate a basic event hosting platform with CRUD capabilities and data visualization.
 
+## 💼 Business Problem
+
+**Problem:**  
+Event organizers often struggle to efficiently manage the end-to-end process of hosting events, including collecting registrations, tracking attendance, gathering feedback, and analyzing event success. These processes are frequently handled through separate tools (e.g., spreadsheets, email forms), leading to disorganization, duplicated work, and lack of real-time insights.
+
+**Why it Matters:**  
+For small businesses, educational institutions, or community groups that host recurring events, a lack of centralized event management and data tracking can lead to lower attendance, poor feedback collection, and missed opportunities to improve future events.
+
+**Solution:**  
+This Flask-based web application provides a streamlined platform to:
+- Create and manage events  
+- Register attendees and track check-ins  
+- Collect and view feedback  
+- Visualize event performance using charts (e.g., average ratings)
+
+By consolidating all these tasks into one interface and supporting data visualization, the application helps organizers make informed decisions, improve attendee experiences, and reduce administrative overhead.
+
+
 ---
+
+## Author
+
+Divya Pateliya  
+Student at University of Lethbridge
+MGT3850 - Assignment 2
 
 ## Features
 
@@ -94,9 +118,3 @@ python app.py
 MIT License (Free to use, modify, distribute)
 
 ---
-
-## Author
-
-Divya Pateliya  
-Student at University of Lethbridge
-MGT3850 - Assignment 2
